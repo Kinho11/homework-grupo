@@ -9,7 +9,7 @@ function mostrarModal() {
 function limparModalAddLembrete() {
     let modalFundo = document.querySelector('.modal-fundo')
     let modalLembrete = document.querySelector('.modal-adicionar')
-
+    let semLembrete = document.querySelector('#semLembrete')
     modalFundo.style.display = 'none'
     modalLembrete.style.display = 'none'
 
@@ -20,14 +20,18 @@ function limparModalAddLembrete() {
     let novoLembrete = document.createElement("div");
     novoLembrete.classList.add('card')
 
-
     let textoLembrete = document.querySelector('#lembrete').value
     let horarioLembrete = document.querySelector('#horario').value
 
-    novoLembrete.innerText = `${textoLembrete} Horario: ${horarioLembrete}`
+
+    novoLembrete.innerHTML = `<span>${textoLembrete}</span> <span>Horario: ${horarioLembrete}</span>`
  
     
     elementoAtual.appendChild(novoLembrete)
+
+    if(elementoAtual.firstChild != null) {
+        semLembrete.classList.add('desativado')
+    }
 
 
 
@@ -42,15 +46,15 @@ function avancar() {
     if(proximoElemento.id != "") {
         textoDaData.innerHTML = proximoElemento.id
 
-        if(elementoAtual.firstChild != undefined) {
-            semLembrete.classList.add('desativado')
-        }
-    
         elementoAtual.classList.add('desativado')
         proximoElemento.classList.remove('desativado')
     }
 
-    
+    if(proximoElemento.firstChild != null) {
+        semLembrete.classList.add('desativado')
+    } else {
+        semLembrete.classList.remove('desativado')
+    }
 
 }
 
@@ -61,16 +65,21 @@ function avancar() {
     let semLembrete = document.querySelector('#semLembrete')
 
 
-    if(elementoAnterior.id != "" && elementoAnterior.id != "semLembrete") {
-        textoDaData.innerHTML = elementoAnterior.id
-
-        if(elementoAtual.firstChild != undefined) {
-            semLembrete.classList.add('desativado')
+    if(elementoAnterior.id != 'semLembrete') {
+        if(elementoAnterior.id != "" && elementoAnterior.id != "semLembrete") {
+            textoDaData.innerHTML = elementoAnterior.id
+        
+            elementoAtual.classList.add('desativado')
+            elementoAnterior.classList.remove('desativado')
         }
     
-        elementoAtual.classList.add('desativado')
-        elementoAnterior.classList.remove('desativado')
+        if(elementoAnterior.firstChild != null) {
+            semLembrete.classList.add('desativado')
+        } else {
+            semLembrete.classList.remove('desativado')
+        }
     }
+
 }
 
 
