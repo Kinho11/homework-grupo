@@ -57,10 +57,20 @@ function avancar() {
     function voltar() {
     let textoDaData = document.querySelector('.data')
     let elementoAnterior = document.querySelector(`#${textoDaData.innerText}`).previousElementSibling
-
+    let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
+    let semLembrete = document.querySelector('#semLembrete')
 
 
     if(elementoAnterior.id != "" && elementoAnterior.id != "semLembrete") {
         textoDaData.innerHTML = elementoAnterior.id
+
+        if(elementoAtual.firstChild != undefined) {
+            semLembrete.classList.add('desativado')
+        }
+    
+        elementoAtual.classList.add('desativado')
+        elementoAnterior.classList.remove('desativado')
     }
 }
+
+
