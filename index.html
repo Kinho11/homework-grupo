@@ -12,27 +12,29 @@
         <div class="quadrado">
             <h1>Reminders App</h1>
             <div class="quadrado-menor">  
-                <button class="botao-esquerda"> < </button>
-                <p>adasdsad</p>
-                <button class="botao-direita">></button>
+                <button class="botao-esquerda" onclick="voltar()"> < </button>
+                <p class="data">Jan-2022</p>
+                <button class="botao-direita" onclick="avancar()">></button>
 
                 <button onclick="mostrarModal()">+ adicionar lembrete</button>
             </div>
         </div>
 
-        <div class="card">Nenhum lembrete cadastrado ainda</div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
-        <div ></div>
+        <div id="semLembrete" class="card">Nenhum lembrete cadastrado ainda</div>
+        <div id="Jan-2022" class="card ">
+            <div class="card">Nenhum lembrete cadastrado ainda</div>
+        </div>
+        <div id="Fev-2022" class="card desativado"></div>
+        <div id="Mar-2022" class="card desativado"></div>
+        <div id="Abr-2022" class="card desativado"></div>
+        <div id="Mai-2022" class="card desativado"></div>
+        <div id="Jun-2022" class="card desativado"></div>
+        <div id="Jul-2022" class="card desativado"></div>
+        <div id="Ago-2022" class="card desativado"></div>
+        <div id="Set-2022" class="card desativado"></div>
+        <div id="Out-2022" class="card desativado"></div>
+        <div id="Nov-2022" class="card desativado"></div>
+        <div id="Dez-2022" class="card desativado"></div>
 
         <div class="modal-fundo"></div>
         <div class="modal-adicionar">
@@ -45,8 +47,8 @@
                 </div>
 
                 <div class="horario">
-                    <label for="">Horário:</label>
-                    <input type="time" name="" id="">   
+                    <label for="horario">Horário:</label>
+                    <input type="time" name="horario" id="horario">   
                 </div>
 
             </div>
