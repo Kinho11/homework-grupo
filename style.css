@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
@@ -99,6 +102,23 @@ p{
     width: 100%;
     background-color: white;
     border-radius: 10px;
+}
+
+.card-lembrete{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.75rem;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.card-pai{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
 }
 
 

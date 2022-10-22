@@ -18,13 +18,13 @@ function limparModalAddLembrete() {
     let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
 
     let novoLembrete = document.createElement("div");
-    novoLembrete.classList.add('card')
+    novoLembrete.classList.add('card-lembrete')
 
     let textoLembrete = document.querySelector('#lembrete').value
     let horarioLembrete = document.querySelector('#horario').value
 
 
-    novoLembrete.innerHTML = `<span>${textoLembrete}</span> <span>Horario: ${horarioLembrete}</span>`
+    novoLembrete.innerHTML = `<span>${textoLembrete}</span> <span>${horarioLembrete}</span>`
  
     
     elementoAtual.appendChild(novoLembrete)
