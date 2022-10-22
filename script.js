@@ -7,34 +7,50 @@ function mostrarModal() {
 }
 
 function limparModalAddLembrete() {
-    let modalFundo = document.querySelector('.modal-fundo')
-    let modalLembrete = document.querySelector('.modal-adicionar')
-    let semLembrete = document.querySelector('#semLembrete')
-    modalFundo.style.display = 'none'
-    modalLembrete.style.display = 'none'
-
-
-    let textoDaData = document.querySelector('.data')
-    let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
-
-    let novoLembrete = document.createElement("div");
-    novoLembrete.classList.add('card-lembrete')
-
     let textoLembrete = document.querySelector('#lembrete').value
     let horarioLembrete = document.querySelector('#horario').value
 
 
-    novoLembrete.innerHTML = `<span>${textoLembrete}</span> <span>${horarioLembrete}</span>`
- 
+    if(textoLembrete != "" && horarioLembrete != "") {
+        let modalFundo = document.querySelector('.modal-fundo')
+        let modalLembrete = document.querySelector('.modal-adicionar')
+        let semLembrete = document.querySelector('#semLembrete')
+        let textoDaData = document.querySelector('.data')
+        let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
+        let novoLembrete = document.createElement("div");
+        let arrComparacao = []
+
+        modalFundo.style.display = 'none'
+        modalLembrete.style.display = 'none'
     
-    elementoAtual.appendChild(novoLembrete)
+        
+        novoLembrete.classList.add('card-lembrete')
+    
+        novoLembrete.innerHTML = `<span>${textoLembrete}</span> <span>${horarioLembrete}</span>`
+     
+        elementoAtual.appendChild(novoLembrete)
+        
+    
+        for(i=0; i < elementoAtual.children.length; i++) {
+            arrComparacao.push(elementoAtual.children[i].children[1].innerText)
+        }
+    
+        arrComparacao.sort()
+    
+        if(elementoAtual.firstChild != null) {
+            semLembrete.classList.add('desativado')
+            elementoAtual.insertBefore(novoLembrete, elementoAtual.children[arrComparacao.indexOf(novoLembrete.children[1].innerText)])
+        }
 
-    if(elementoAtual.firstChild != null) {
-        semLembrete.classList.add('desativado')
+        console.log(arrComparacao)
+    
+        textoLembrete = ""
+        horarioLembrete = ""
+     
+    } else {
+        alert("Campo vazio dectado !!")
     }
-
-
-
+    
 }
 
 function avancar() {
