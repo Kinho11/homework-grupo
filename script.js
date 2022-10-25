@@ -27,6 +27,8 @@ function avancar() {
 
     let divPai = document.querySelector('#pai')
 
+   
+
     contadorMeses++
     if(contadorMeses%12 == 0) {
         contadorAnos++
@@ -34,6 +36,7 @@ function avancar() {
     
     if(elementoAtual != null) {
         elementoAtual.classList.add('desativado')
+        semLembrete.classList.remove('desativado')
     }
     
     
@@ -46,12 +49,21 @@ function avancar() {
         divPai.insertAdjacentElement("beforeend", novoLembrete)
 
     }
+
+    if(elementoAtual != null) {
+        if(elementoAtual.firstChild == null) {
+         semLembrete.classList.remove('desativado')
+        } else {
+            semLembrete.classList.add('desativado')
+            elementoAtual.classList.remove('desativado')
+        }
+     }
         
         if(elementoAtual != null) {
             elementoAtual.classList.remove('desativado')
 
         }
-    
+        
 }
 
 function voltar() {
@@ -62,9 +74,16 @@ function voltar() {
         if(contadorMeses%12 == 0) {
             contadorAnos--
         }
+        
+        
+        
         if(elementoAtual != null) {
             elementoAtual.classList.add('desativado')
-        }
+            semLembrete.classList.add('desativado')
+            if(elementoAtual.firstChild != null) {
+             semLembrete.classList.remove('desativado')
+            }
+         }
         
         contadorMeses--
 
@@ -75,8 +94,11 @@ function voltar() {
 
         if(elementoAtual != null) {
             elementoAtual.classList.remove('desativado')
-
-        }
+            semLembrete.classList.add('desativado')
+            if(elementoAtual.firstChild == null) {
+             semLembrete.classList.remove('desativado')
+            }
+         }
         
         let divPai = document.querySelector('#pai')
        
@@ -85,10 +107,9 @@ function voltar() {
             novoLembrete.className = "card-pai"
             novoLembrete.setAttribute('id', `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`)
             divPai.insertAdjacentElement("afterbegin", novoLembrete)
-    
+            semLembrete.classList.remove('desativado')
         }
         
-
 }
 
 function limparModalAddLembrete() {
