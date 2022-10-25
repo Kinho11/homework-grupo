@@ -6,6 +6,91 @@ function mostrarModal() {
     modalLembrete.style.display = 'flex'
 }
 
+
+const data = new Date()
+var meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+var textoDaData = document.querySelector('.data')
+textoDaData.innerText = `${meses[data.getMonth()]+'-'+data.getFullYear()}`
+var contadorMeses = data.getMonth()
+var contadorAnos = data.getFullYear()
+let novoLembrete = document.createElement("div");
+let divPai = document.querySelector('#pai')
+novoLembrete.className = "card-pai"
+novoLembrete.setAttribute('id', `${meses[contadorMeses%12]}-${contadorAnos}`)
+divPai.insertAdjacentElement("beforeend", novoLembrete)
+contadorMeses = contadorMeses + 1200000
+
+function avancar() {
+    let textoDaData = document.querySelector('.data')
+    let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
+    let semLembrete = document.querySelector('#semLembrete')
+
+    let divPai = document.querySelector('#pai')
+
+    contadorMeses++
+    if(contadorMeses%12 == 0) {
+        contadorAnos++
+    }
+    
+    if(elementoAtual != null) {
+        elementoAtual.classList.add('desativado')
+    }
+    
+    
+    textoDaData.innerText = `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`
+    elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
+    if(elementoAtual == null) {
+        let novoLembrete = document.createElement("div");
+        novoLembrete.className = "card-pai"
+        novoLembrete.setAttribute('id', `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`)
+        divPai.insertAdjacentElement("beforeend", novoLembrete)
+
+    }
+        
+        if(elementoAtual != null) {
+            elementoAtual.classList.remove('desativado')
+
+        }
+    
+}
+
+function voltar() {
+        let textoDaData = document.querySelector('.data')
+        let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
+        let semLembrete = document.querySelector('#semLembrete')
+
+        if(contadorMeses%12 == 0) {
+            contadorAnos--
+        }
+        if(elementoAtual != null) {
+            elementoAtual.classList.add('desativado')
+        }
+        
+        contadorMeses--
+
+        textoDaData.innerText = `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`
+
+        
+        elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
+
+        if(elementoAtual != null) {
+            elementoAtual.classList.remove('desativado')
+
+        }
+        
+        let divPai = document.querySelector('#pai')
+       
+        if(elementoAtual == null ) {
+            let novoLembrete = document.createElement("div");
+            novoLembrete.className = "card-pai"
+            novoLembrete.setAttribute('id', `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`)
+            divPai.insertAdjacentElement("afterbegin", novoLembrete)
+    
+        }
+        
+
+}
+
 function limparModalAddLembrete() {
     let textoLembrete = document.querySelector('#lembrete').value
     let horarioLembrete = document.querySelector('#horario').value
@@ -51,68 +136,3 @@ function limparModalAddLembrete() {
     document.querySelector('#horario').value = ""
     
 }
-
-
-const data = new Date()
-var meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
-var textoDaData = document.querySelector('.data')
-textoDaData.innerText = `${meses[data.getMonth()]+'-'+data.getFullYear()}`
-var contadorMeses = data.getMonth()+1000000
-var contadorAnos = data.getFullYear()
-let novoLembrete = document.createElement("div");
-let divPai = document.querySelector('#pai')
-novoLembrete.className = "card-pai"
-novoLembrete.setAttribute('id', `${meses[contadorMeses%12]}-${contadorAnos}`)
-divPai.insertAdjacentElement("beforeend", novoLembrete)
-
-
-function avancar() {
-    let textoDaData = document.querySelector('.data')
-    contadorMeses++
-    
-    if(contadorMeses%12 == 0) {
-        contadorAnos++
-    }
-    
-    textoDaData.innerText = `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`
-    
-    let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
-    let divPai = document.querySelector('#pai')
-
-    
-
-    if(elementoAtual == null) {
-        let novoLembrete = document.createElement("div");
-        novoLembrete.className = "card-pai"
-        novoLembrete.setAttribute('id', `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`)
-        divPai.insertAdjacentElement("beforeend", novoLembrete)
-
-    }
-
-    
-}
-
-    function voltar() {
-        let textoDaData = document.querySelector('.data')
-        contadorMeses--
-       
-        textoDaData.innerText = `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`
-        
-        let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
-        let divPai = document.querySelector('#pai')
-
-        if(elementoAtual == null) {
-            let novoLembrete = document.createElement("div");
-            novoLembrete.className = "card-pai"
-            novoLembrete.setAttribute('id', `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`)
-            divPai.insertAdjacentElement("afterbegin", novoLembrete)
-    
-        }
-
-        if(contadorMeses%12 == 0) {
-            contadorAnos--
-        }
-
-}
-
-
