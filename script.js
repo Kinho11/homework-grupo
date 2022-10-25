@@ -36,65 +36,82 @@ function limparModalAddLembrete() {
         }
     
         arrComparacao.sort()
+
     
         if(elementoAtual.firstChild != null) {
             semLembrete.classList.add('desativado')
             elementoAtual.insertBefore(novoLembrete, elementoAtual.children[arrComparacao.indexOf(novoLembrete.children[1].innerText)])
         }
-
-        console.log(arrComparacao)
-    
-        textoLembrete = ""
-        horarioLembrete = ""
      
     } else {
         alert("Campo vazio dectado !!")
     }
+
+    document.querySelector('#lembrete').value = ""
+    document.querySelector('#horario').value = ""
     
 }
+
+
+const data = new Date()
+var meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+var textoDaData = document.querySelector('.data')
+textoDaData.innerText = `${meses[data.getMonth()]+'-'+data.getFullYear()}`
+var contadorMeses = data.getMonth()+1000000
+var contadorAnos = data.getFullYear()
+let novoLembrete = document.createElement("div");
+let divPai = document.querySelector('#pai')
+novoLembrete.className = "card-pai"
+novoLembrete.setAttribute('id', `${meses[contadorMeses%12]}-${contadorAnos}`)
+divPai.insertAdjacentElement("beforeend", novoLembrete)
+
 
 function avancar() {
     let textoDaData = document.querySelector('.data')
-    let proximoElemento = document.querySelector(`#${textoDaData.innerText}`).nextElementSibling
+    contadorMeses++
+    
+    if(contadorMeses%12 == 0) {
+        contadorAnos++
+    }
+    
+    textoDaData.innerText = `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`
+    
     let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
-    let semLembrete = document.querySelector('#semLembrete')
+    let divPai = document.querySelector('#pai')
 
-    if(proximoElemento.id != "") {
-        textoDaData.innerHTML = proximoElemento.id
+    
 
-        elementoAtual.classList.add('desativado')
-        proximoElemento.classList.remove('desativado')
+    if(elementoAtual == null) {
+        let novoLembrete = document.createElement("div");
+        novoLembrete.className = "card-pai"
+        novoLembrete.setAttribute('id', `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`)
+        divPai.insertAdjacentElement("beforeend", novoLembrete)
+
     }
 
-    if(proximoElemento.firstChild != null) {
-        semLembrete.classList.add('desativado')
-    } else {
-        semLembrete.classList.remove('desativado')
-    }
-
+    
 }
 
     function voltar() {
-    let textoDaData = document.querySelector('.data')
-    let elementoAnterior = document.querySelector(`#${textoDaData.innerText}`).previousElementSibling
-    let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
-    let semLembrete = document.querySelector('#semLembrete')
-
-
-    if(elementoAnterior.id != 'semLembrete') {
-        if(elementoAnterior.id != "" && elementoAnterior.id != "semLembrete") {
-            textoDaData.innerHTML = elementoAnterior.id
+        let textoDaData = document.querySelector('.data')
+        contadorMeses--
+       
+        textoDaData.innerText = `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`
         
-            elementoAtual.classList.add('desativado')
-            elementoAnterior.classList.remove('desativado')
-        }
+        let elementoAtual = document.querySelector(`#${textoDaData.innerText}`)
+        let divPai = document.querySelector('#pai')
+
+        if(elementoAtual == null) {
+            let novoLembrete = document.createElement("div");
+            novoLembrete.className = "card-pai"
+            novoLembrete.setAttribute('id', `${meses[Math.abs(contadorMeses)%12]}-${contadorAnos}`)
+            divPai.insertAdjacentElement("afterbegin", novoLembrete)
     
-        if(elementoAnterior.firstChild != null) {
-            semLembrete.classList.add('desativado')
-        } else {
-            semLembrete.classList.remove('desativado')
         }
-    }
+
+        if(contadorMeses%12 == 0) {
+            contadorAnos--
+        }
 
 }
 
