@@ -181,6 +181,13 @@ p{
     margin-bottom: 1.25rem;
 }
 
+#pai{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .modal-adicionar .lembrete{
     display: flex;
     flex-direction: column;
